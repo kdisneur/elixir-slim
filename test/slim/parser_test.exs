@@ -20,9 +20,22 @@ defmodule Slim.ParserTest do
          [~s(strong BETTER)]
        ]
      ],
-     [~s(div),
-       [~s(p class="disclaimer" That's just my humble opinion)]
+     [~s(div class="disclaimer"),
+       [~s(p class="disclaimer" That's just my humble opinion)],
+       [~s(ul),
+         [~s(li id="first" First)],
+         [~s(li id="second" Second)],
+       ],
+       [~s(div class="nested1"),
+         [~s(div class="nested2"),
+           [~s(a href="link"),
+             [~s(| Click to enlarge)]
+           ]
+         ]
+       ],
+       [~s(span Here we are)]
      ],
+     [~s(footer The end)],
      [""]
     ])
   end

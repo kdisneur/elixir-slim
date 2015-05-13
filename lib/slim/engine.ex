@@ -1,3 +1,9 @@
 defmodule Slim.Engine do
-  def compile(path, _final_name), do: File.read!(path) |> Slim.Parser.parse |> Slim.Builder.build
+  def compile(path, name) do
+    path
+    |> File.read!
+    |> Slim.Parser.parse
+    |> Slim.Builder.build
+    # |> EEx.compile_string(engine: engine_for(name), file: path, line: 1)
+  end
 end

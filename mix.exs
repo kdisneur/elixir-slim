@@ -12,7 +12,7 @@ defmodule Slim.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :phoenix]]
   end
 
   # Dependencies can be Hex packages:
@@ -25,6 +25,6 @@ defmodule Slim.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    []
+    [{:phoenix, "~> 0.13.0"}]
   end
 end

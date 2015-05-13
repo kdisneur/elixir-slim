@@ -28,6 +28,10 @@ defmodule Slim.ParserTest do
        [~s(ul),
          [~s(li id="first" First)],
          [~s(li id="second" Second)],
+         [~s(li),
+           [~s(| Maths hard hard. 1 + 1 =)],
+           [~s(= 1 + 1)]
+         ]
        ],
        [~s(div class="nested1"),
          [~s(div class="nested2"),

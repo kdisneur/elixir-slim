@@ -8,6 +8,7 @@ defmodule Slim.Builder.Element do
       Slim.Builder.Element.SimpleTextWithoutSpaces,
       Slim.Builder.Element.SimpleTextWithSpaces,
       Slim.Builder.Element.EvaluatedElement,
+      Slim.Builder.Element.AutoClosingTags,
       Slim.Builder.Element.MultilineTag,
       Slim.Builder.Element.MonolineTag
     ] |> Enum.find(&(&1.match?(element)))
@@ -45,6 +46,17 @@ defmodule Slim.Builder.Element do
     def match?([element]), do: Regex.match?(~r(^=\s*), element)
     def match?(_), do: false
     def build([element], padding), do: String.duplicate(" ", padding) <> Regex.replace(~r(^=\s*), element, "executed! ") <> Slim.Config.new_line
+  end
+
+  defmodule AutoClosingTags do
+    def match?([element|tail]), do: Regex.match?(~r/^\s*(br|hr|img|input|meta)\s*((([a-zA-Z0-9-_]+="[^"]+"\s*|)*)|)\s*/, element)
+    def match?(_), do: false
+    def build([element], padding) do
+      captured = Regex.named_captures(~r/^\s*(?<tag>\w+)\s*((?<attributes>([a-zA-Z0-9-_]+="[^"]+"\s*|)*)|)\s*/, element)
+      html_element = String.duplicate(" ", padding) <> "<" <> captured["tag"]
+      if String.length(captured["attributes"]) > 0, do: html_element = html_element <> " " <> String.lstrip(captured["attributes"])
+      html_element <> ">" <> Slim.Config.new_line
+    end
   end
 
   defmodule MonolineTag do

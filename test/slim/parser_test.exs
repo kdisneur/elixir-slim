@@ -17,10 +17,12 @@ defmodule Slim.ParserTest do
        [~s(h2 Hello World)],
        [~s(p),
          [~s(| HTML is good but...)],
+         [~s(br)],
          [~s(' slim is)],
          [~s(strong BETTER)]
        ]
      ],
+     [~s(hr class="my-class")],
      [~s(div class="disclaimer"),
        [~s(p class="disclaimer" That's just my humble opinion)],
        [~s(ul),

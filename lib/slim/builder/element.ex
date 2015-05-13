@@ -5,9 +5,10 @@ defmodule Slim.Builder.Element do
   defp find_builder(element) do
     [
       Slim.Builder.Element.Doctype,
-      Slim.Builder.Element.SimpleTextWithoutSpaces,
       Slim.Builder.Element.SimpleTextWithSpaces,
-      Slim.Builder.Element.EvaluatedElement,
+      Slim.Builder.Element.SimpleTextWithoutSpaces,
+      Slim.Builder.Element.EvaluatedElementWithSpaces,
+      Slim.Builder.Element.EvaluatedElementWithoutSpaces,
       Slim.Builder.Element.AutoClosingTags,
       Slim.Builder.Element.MultilineTag,
       Slim.Builder.Element.MonolineTag
@@ -30,19 +31,25 @@ defmodule Slim.Builder.Element do
     end
   end
 
-  defmodule SimpleTextWithoutSpaces do
-    def match?([element]), do: Regex.match?(~r(^\|\s*), element)
-    def match?(_), do: false
-    def build([element], padding), do: String.duplicate(" ", padding) <> Slim.Builder.Element.interpolate_content(Regex.replace(~r(^\|\s*), element, "")) <> Slim.Config.new_line
-  end
-
   defmodule SimpleTextWithSpaces do
     def match?([element]), do: Regex.match?(~r(^'\s*), element)
     def match?(_), do: false
     def build([element], padding), do: String.duplicate(" ", padding) <> Slim.Builder.Element.interpolate_content(Regex.replace(~r(^'\s*), element, "&nbsp;")) <> Slim.Config.new_line
   end
 
-  defmodule EvaluatedElement do
+  defmodule SimpleTextWithoutSpaces do
+    def match?([element]), do: Regex.match?(~r(^\|\s*), element)
+    def match?(_), do: false
+    def build([element], padding), do: String.duplicate(" ", padding) <> Slim.Builder.Element.interpolate_content(Regex.replace(~r(^\|\s*), element, "")) <> Slim.Config.new_line
+  end
+
+  defmodule EvaluatedElementWithSpaces do
+    def match?([element]), do: Regex.match?(~r(^='\s*), element)
+    def match?(_), do: false
+    def build([element], padding), do: String.duplicate(" ", padding) <> Regex.replace(~r/^='\s*(.*)/, element, "&nbsp;<%= \\1 %>") <> Slim.Config.new_line
+  end
+
+  defmodule EvaluatedElementWithoutSpaces do
     def match?([element]), do: Regex.match?(~r(^=\s*), element)
     def match?(_), do: false
     def build([element], padding), do: String.duplicate(" ", padding) <> Regex.replace(~r/^=\s*(.*)/, element, "<%= \\1 %>") <> Slim.Config.new_line

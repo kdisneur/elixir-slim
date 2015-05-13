@@ -27,8 +27,12 @@ defmodule Slim.ParserTest do
          [~s(li id="first" First)],
          [~s(li id="second" Second)],
          [~s(li),
-           [~s(| Maths hard hard. 1 + 1 =)],
+           [~s(| Maths are hard. 1 + 1 =)],
            [~s(= 1 + 1)]
+         ],
+         [~s(li),
+           [~s(| Maths are nice with more spaces:)],
+           [~s(=' 191 * 7)]
          ]
        ],
        [~s(div class="nested1"),

@@ -12,7 +12,8 @@ defmodule Slim.ParserTest do
 
   test "parse nested content" do
     test_file("test/fixtures/nested_content_with_classes.html.slim",
-    [[~s(div class="title" data-title="Yo"),
+    [[~s(doctype html)],
+     [~s(div class="title" data-title="Yo"),
        [~s(h2 Hello World)],
        [~s(p),
          [~s(| HTML is good but...)],

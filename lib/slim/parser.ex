@@ -5,6 +5,7 @@ defmodule Slim.Parser do
   defp parse_trees([], results), do: results
   defp parse_trees([head|tail], results), do: parse_trees(tail, insert_line(cleaned_line(head), padding(head), results))
 
+  defp insert_line("", _padding, results), do: results
   defp insert_line(line, 0, []), do: [[line]]
   defp insert_line(line, 0, results), do: results ++ [[line]]
   defp insert_line(line, padding, results) do

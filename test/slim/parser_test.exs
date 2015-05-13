@@ -5,9 +5,7 @@ defmodule Slim.ParserTest do
 
   test "parse simple content" do
     test_file("test/fixtures/content_with_classes.html.slim",
-    [[~s(div class="title" data-title="Yo" Hello World!)],
-     [""]
-    ])
+    [[~s(div class="title" data-title="Yo" Hello World!)]])
   end
 
   test "parse nested content" do
@@ -42,8 +40,7 @@ defmodule Slim.ParserTest do
        ],
        [~s(span Here we are)]
      ],
-     [~s(footer The end)],
-     [""]
+     [~s(footer The end)]
     ])
   end
 end

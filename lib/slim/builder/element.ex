@@ -33,13 +33,13 @@ defmodule Slim.Builder.Element do
   defmodule SimpleTextWithoutSpaces do
     def match?([element]), do: Regex.match?(~r(^\|\s*), element)
     def match?(_), do: false
-    def build([element], padding), do: String.duplicate(" ", padding) <> Regex.replace(~r(^\|\s*), element, "") <> Slim.Config.new_line
+    def build([element], padding), do: String.duplicate(" ", padding) <> Slim.Builder.Element.interpolate_content(Regex.replace(~r(^\|\s*), element, "")) <> Slim.Config.new_line
   end
 
   defmodule SimpleTextWithSpaces do
     def match?([element]), do: Regex.match?(~r(^'\s*), element)
     def match?(_), do: false
-    def build([element], padding), do: String.duplicate(" ", padding) <> Regex.replace(~r(^'\s*), element, "&nbsp;") <> Slim.Config.new_line
+    def build([element], padding), do: String.duplicate(" ", padding) <> Slim.Builder.Element.interpolate_content(Regex.replace(~r(^'\s*), element, "&nbsp;")) <> Slim.Config.new_line
   end
 
   defmodule EvaluatedElement do
@@ -54,7 +54,7 @@ defmodule Slim.Builder.Element do
     def build([element], padding) do
       captured = Regex.named_captures(~r/^\s*(?<tag>\w+)\s*((?<attributes>([a-zA-Z0-9-_]+="[^"]+"\s*|)*)|)\s*/, element)
       html_element = String.duplicate(" ", padding) <> "<" <> captured["tag"]
-      if String.length(captured["attributes"]) > 0, do: html_element = html_element <> " " <> String.lstrip(captured["attributes"])
+      if String.length(captured["attributes"]) > 0, do: html_element = html_element <> " " <> String.lstrip(Slim.Builder.Element.interpolate_content(captured["attributes"]))
       html_element <> ">" <> Slim.Config.new_line
     end
   end
@@ -80,7 +80,7 @@ defmodule Slim.Builder.Element do
   end
 
   def build_complex_element(tag, attributes, content, padding \\ 0, with_new_line \\ false) do
-    attributes =  String.rstrip(attributes)
+    attributes =  interpolate_content(String.rstrip(attributes))
     html_element = String.duplicate(" ", padding) <> "<" <> tag
     if String.length(attributes) > 0, do: html_element = html_element <> " " <> attributes
     html_element = html_element <> ">"
@@ -89,4 +89,6 @@ defmodule Slim.Builder.Element do
     if with_new_line, do: html_element = html_element <> String.duplicate(" ", padding)
     html_element <> "</" <> tag <> ">"
   end
+
+  def interpolate_content(content), do: Regex.replace(~r/#\{([^\}]*)\}/, content, "<%= \\1 %>")
 end

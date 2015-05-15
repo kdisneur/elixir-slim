@@ -45,7 +45,12 @@ defmodule Slim.ParserTest do
            ]
          ]
        ],
-       [~s(span Here we are)]
+       [~s(span Here we are)],
+       [~s(ul),
+         [~s(= for x <- [1, 2, 3] do),
+           [~s(li element number \#{x})]
+         ]
+       ]
      ],
      [~s(footer The end)],
      [~s(script src="\#{"/js/app.js"}")]

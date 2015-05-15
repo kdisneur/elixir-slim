@@ -28,5 +28,9 @@ div class="disclaimer"
       a href="link"
         | Click to enlarge
   span Here we are
+  ul
+    = for x <- [1, 2, 3] do
+      li element number #{x}
+
 footer The end
 script src="#{"/js/app.js"}"

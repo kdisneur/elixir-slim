@@ -3,7 +3,7 @@ defmodule Slim.Builder.Element.IfElementTest do
 
   test "build/2 a if without else" do
     result = Slim.Builder.Element.IfElement.build([
-      ~s(- if 1 == 1 do),
+      ~s(= if 1 == 1 do),
         [~s(| Hello)],
         [~s(' world)],
     ], 0)

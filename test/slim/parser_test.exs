@@ -44,7 +44,8 @@ defmodule Slim.ParserTest do
        ],
        [~s(span Here we are)]
      ],
-     [~s(footer The end)]
+     [~s(footer The end)],
+     [~s(script src="\#{"/js/app.js"}")]
     ])
   end
 end

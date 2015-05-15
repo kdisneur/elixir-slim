@@ -9,6 +9,7 @@ defmodule Slim.Builder.Element do
       Slim.Builder.Element.SimpleTextWithoutSpaces,
       Slim.Builder.Element.EvaluatedElementWithSpaces,
       Slim.Builder.Element.EvaluatedElementWithoutSpaces,
+      Slim.Builder.Element.IfElement,
       Slim.Builder.Element.AutoClosingTags,
       Slim.Builder.Element.MultilineTag,
       Slim.Builder.Element.MonolineTag

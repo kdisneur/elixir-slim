@@ -35,6 +35,9 @@ defmodule Slim.ParserTest do
            [~s(=' 191 * 7)]
          ]
        ],
+       [~s(- if 2 > 1 do),
+         ["| Yeahhhhh 2 is still geater than 1"]
+       ],
        [~s(div class="nested1"),
          [~s(div class="nested2"),
            [~s(a href="link"),

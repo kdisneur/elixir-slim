@@ -1,5 +1,5 @@
 defmodule Slim.Builder.Element.MonolineTag do
-  def match?([element]), do: Regex.match?(~r/^\s*\w+\s*((([a-zA-Z0-9-_]+="[^"]+"\s*|)*)|)(.*)/, element)
+  def match?([element]), do: Regex.match?(~r/^\s*(\w+)\s*.*$/, element)
   def match?([element|contents]), do: false
   def match?(_), do: false
   def build([element], padding) do

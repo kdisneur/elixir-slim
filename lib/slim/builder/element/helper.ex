@@ -28,6 +28,7 @@ defmodule Slim.Builder.Element.Helper do
     String.slice(full, base, String.length(full) - base)
   end
 
+  defp find_end_of_attribute(""), do: {"", ""}
   defp find_end_of_attribute(raw_content) do
     %{ "basic_value" => value } = Regex.named_captures(~r/^(?<basic_value>[^"]+)/, raw_content)
     case String.contains?(value, ~s(\#{)) do

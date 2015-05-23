@@ -1,5 +1,5 @@
 defmodule Slim.Builder.Element.MultilineTag do
-  def match?([element|_contents]), do: Regex.match?(~r/^\s*(\w+)\s*((([a-zA-Z0-9-_]+="[^"]+"\s*|)*)|)\s*$/, element)
+  def match?([element|contents]) when length(contents) > 0, do: Regex.match?(~r/^\s*(\w+)\s*.*$/, element)
   def match?(_), do: false
   def build([element|contents], padding) do
     captured = Regex.named_captures(~r/^\s*(?<tag>\w+)\s*(?<attributes>.*)$/, element)

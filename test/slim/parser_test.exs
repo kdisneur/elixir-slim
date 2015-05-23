@@ -21,6 +21,7 @@ defmodule Slim.ParserTest do
        ]
      ],
      [~s(hr class="my-class")],
+     [~s(img src="\#{"computed_path"}")],
      [~s(div class="disclaimer"),
        [~s(p class="disclaimer" That's just my humble opinion)],
        [~s(ul),
@@ -38,7 +39,7 @@ defmodule Slim.ParserTest do
        [~s(= if 2 > 1 do),
          ["| Yeahhhhh 2 is still geater than 1"]
        ],
-       [~s(div class="nested1"),
+       [~s(div class="nested1 \#{"computed_class"}"),
          [~s(div class="nested2"),
            [~s(a href="link"),
              [~s(| Click to enlarge)]

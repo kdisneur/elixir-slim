@@ -1,7 +1,5 @@
 defmodule Slim.Engine do
-  @behaviour Phoenix.Template.Engine
-
-  def compile(path, name) do
+  def compile(path, _name) do
     path
     |> File.read!
     |> Slim.Parser.parse

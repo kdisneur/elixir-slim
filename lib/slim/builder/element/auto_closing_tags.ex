@@ -1,5 +1,5 @@
 defmodule Slim.Builder.Element.AutoClosingTags do
-  def match?([element|tail]), do: Regex.match?(~r/^\s*(br|hr|img|input|meta)\s*.*$/, element)
+  def match?([element|_tail]), do: Regex.match?(~r/^\s*(br|hr|img|input|meta)\s*.*$/, element)
   def match?(_), do: false
   def build([element], padding) do
     captured = Regex.named_captures(~r/^\s*(?<tag>\w+)\s*(?<attributes>.*)$/, element)

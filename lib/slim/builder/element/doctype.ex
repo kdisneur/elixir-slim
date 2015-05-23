@@ -1,7 +1,7 @@
 defmodule Slim.Builder.Element.Doctype do
   def match?([element]), do: Regex.match?(~r(^doctype ), element)
   def match?(_), do: false
-  def build([element], padding) do
+  def build([element], _padding) do
     case Regex.replace(~r/^(doctype\s+)/, element, "") do
       doctype when doctype == "html" or doctype == 5 -> ~s(<!DOCTYPE html>)
       doctype when doctype == "1.1" -> ~s(<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">)

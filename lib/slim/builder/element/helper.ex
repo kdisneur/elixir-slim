@@ -38,7 +38,7 @@ defmodule Slim.Builder.Element.Helper do
   end
 
   defp find_end_of_interpolated_attribute(raw_content), do: find_end_of_interpolated_attribute(raw_content, 0, "")
-  defp find_end_of_interpolated_attribute("", padding, result), do: {result, ""}
+  defp find_end_of_interpolated_attribute("", _padding, result), do: {result, ""}
   defp find_end_of_interpolated_attribute("\"" <> raw_content, 0, result), do: {result, raw_content}
   defp find_end_of_interpolated_attribute(~s(\#{) <> raw_content, padding, result), do: find_end_of_interpolated_attribute(raw_content, padding + 1, result <> ~s(\#{))
   defp find_end_of_interpolated_attribute(~s(}) <> raw_content, padding, result), do: find_end_of_interpolated_attribute(raw_content, padding - 1, result <> ~s(}))

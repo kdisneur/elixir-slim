@@ -6,6 +6,6 @@ defmodule Slim.Builder.Element.IfElement do
 
     html = Regex.replace(~r/^=\s*(.*)/, element, "<%= \\1 %>")
     html = html <> content
-    html = html <> "<% end %>"
+    html <> "<% end %>"
   end
 end

@@ -6,6 +6,6 @@ defmodule Slim.Builder.Element.EvaluatedMultilineElement do
 
     html = Regex.replace(~r/^=\s*(.*)/, element, "<%= \\1 %>")
     html = html <> content
-    html = html <> "<% end %>"
+    html <> "<% end %>"
   end
 end

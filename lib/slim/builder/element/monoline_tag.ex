@@ -1,6 +1,6 @@
 defmodule Slim.Builder.Element.MonolineTag do
   def match?([element]), do: Regex.match?(~r/^\s*(\w+)\s*.*$/, element)
-  def match?([element|contents]), do: false
+  def match?([_element|_contents]), do: false
   def match?(_), do: false
   def build([element], padding) do
     captured = Regex.named_captures(~r/^\s*(?<tag>\w+)\s*(?<attributes>.*)/, element)

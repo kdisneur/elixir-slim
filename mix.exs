@@ -25,6 +25,6 @@ defmodule Slim.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    [{:phoenix_html, "~> 1.0.1"}]
+    [{:phoenix_html, "~> 1.0"}]
   end
 end
